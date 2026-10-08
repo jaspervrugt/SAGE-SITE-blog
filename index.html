@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Hydrologic theory, experiments, and software updates with SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.">
+  <title>SAGE &amp; SITEhydrology — Blog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="#">SAGE &amp; SITE<span>hydrology</span></a>
+    <nav aria-label="Main navigation"><a href="#welcome">Blog</a><a href="#about">About</a><a href="#downloads">Downloads</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Hydrologic theory · Hypothesis testing · Large-sample data</p>
+      <h1>Understanding catchments,<br>one hypothesis at a time.</h1>
+      <p>Notes from the development and application of SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.</p>
+    </section>
+    <article id="welcome">
+      <header class="post-header">
+        <p class="eyebrow">What’s new · Why SAGE · First post</p>
+        <h2>From prediction to understanding: testing hydrologic hypotheses across countries</h2>
+        <p class="byline">Jasper A. Vrugt · October 8, 2026</p>
+      </header>
+      <div class="post-body">
+        <p>I developed SAGE to make it easier to test hydrologic hypotheses against large-sample datasets, in pursuit of new theory about how catchments store, transmit, and release water. Faster training is useful because it makes more scientific experiments possible. The ultimate aim is a better understanding of how catchments function.</p>
+        <p>The blog will combine capability extensions—new modules, models, datasets, and options—with project descriptions, practical tutorials, bug fixes, and release notes. I also want to share general observations and research ideas, discuss numerical and modeling choices, and feature applications and questions contributed by users.</p>
+        <p>My hope is that this blog becomes a place to exchange experiments and questions. If you use SAGE or SITE in your research, I would be interested to hear what you tested, what failed, and what you discovered about catchment behavior. This first post is longer because it introduces the purpose of SAGE and the scope of the blog. Future posts will be much shorter, each focused on one update, experiment, or idea, so they are easier to read and use.</p>
+        <h3>What did the model learn?</h3>
+        <p>We can train an LSTM with tens of thousands of adjustable parameters to obtain excellent predictions of river discharge. But what did it learn about the watershed? Which parts of its behavior reflect storage, connectivity, thresholds, or delayed responses—and which relationships will hold under conditions outside the training data?</p>
+        <p>Machine learning offers powerful tools for prediction and discovery. My concern is what happens if predictive accuracy becomes the sole measure of progress. Hydrology risks becoming a number-crunching discipline in which improving a score takes precedence over explaining the system that produced the observations.</p>
+        <p>A scientific discipline needs theory on which it can build. Theory allows us to state assumptions explicitly, derive testable consequences, design experiments that distinguish competing explanations, and revise our understanding when observations contradict it. It also gives us a basis for asking when a relationship should transfer to a new catchment, climate, or time scale.</p>
+        <h3>SAGE as a framework for hypothesis testing</h3>
+        <p>SAGE trains hydrologic models across a collection of basins. It learns a relationship between catchment attributes and model parameters, allowing information from the training basins to inform predictions in other basins. Analytic forward sensitivities provide the gradients used in training.</p>
+        <p>This makes it practical to express a hypothesis in a model’s equations, compare alternative formulations under aligned conditions, and examine whether their behavior transfers beyond the calibration sample. We might ask whether a different storage–discharge relationship explains recession behavior, whether a delayed response improves the representation of transport, or whether a proposed mechanism remains useful across contrasting catchments.</p>
+        <p>A good fit alone does not establish that a mechanism is correct. Different models can reproduce similar discharge records. Testing against independent basins and periods, examining model states and fluxes, and using additional observation types where available can provide stronger constraints. SAGE is intended to make that cycle of proposing, testing, rejecting, and refining hypotheses easier. For example, HYD-RESPONSES allows hypotheses to be tested against discharge, snow water equivalent, and soil moisture using the seven built-in models or <code>user_model</code>.</p>
+        <h3>Extending those tests across countries</h3>
+        <p>Most datasets available in SAGE are organized by country, with several countries offering more than one collection. Examples include CAMELS-US, MACH-US, and CAMELSH-US for the United States; CAMELS-KR and CAMELSH-KR for South Korea; and CAMELS-ES and BULL-ES for Spain.</p>
+        <p>Multi-country training was already possible in v1.0.3 with CAMELS-AT, based on LamaH-CE, which includes Austria and neighboring countries such as Czechia and Hungary. The new CHAMELLION integration brings together European catchments, while the combined CAMELS-SPAT integration covers the United States and Canada. These additions broaden the range of environments available for training and testing hydrologic hypotheses across countries.</p>
+        <p>These collections allow training and evaluation to span national boundaries within a dataset. Country boundaries are useful for organizing data, but the scientific questions concern differences in climate, soils, geology, topography, and hydrologic response. Does a proposed relationship explain behavior across those differences? Where does it fail, and what might that failure tell us about the processes missing from the model?</p>
+        <p><strong>Development status:</strong> CHAMELLION and the combined US–Canada CAMELS-SPAT integration are additions being prepared for v1.0.4; they are not features of the published v1.0.3 application.</p>
+        <figure>
+          <a href="assets/sage-europe-basins.png"><img src="assets/sage-europe-basins.png" alt="SAGE Europe tab displaying CHAMELLION training basins as blue circles and evaluation basins as green squares" width="1038" height="1022"></a>
+          <figcaption>The Europe tab in SAGEhydrology showing CHAMELLION catchments selected for training (blue circles; 3,648 basins) and evaluation (green squares; 912 basins). Click the image to view it at full size.</figcaption>
+        </figure>
+        <h3>A basin-by-basin benchmark with SITE</h3>
+        <p>SITE calibrates a separate parameter vector for each basin. It provides a complementary benchmark: how well can the same model perform when its parameters are estimated independently for each watershed?</p>
+        <p>Comparing SAGE and SITE helps us examine the benefits and limitations of learning across basins. The comparison is most informative when the model, observations, time periods, objective function, and numerical settings are aligned. Neither approach establishes a theory by itself; both support experiments that can challenge it.</p>
+        <h3>Making experiments easier to repeat</h3>
+        <p>I developed the graphical interfaces to make these experiments easier to configure, inspect, and repeat. The workflow brings together dataset installation, basin selection, model settings, training or calibration, and diagnostic plots. The computational source is also available for researchers who want to inspect or extend the methods.</p>
+        <h3>Where to begin</h3>
+        <p>Download the application for your operating system from the <a href="https://github.com/jaspervrugt/SAGEhydrology/releases">SAGEhydrology releases</a> or <a href="https://github.com/jaspervrugt/SITEhydrology/releases">SITEhydrology releases</a> page. Start with a supported dataset and a small experiment before expanding to a larger basin collection. While you explore SAGE’s current capabilities, I am preparing v1.0.4 with AI-assisted modeling and developing two further modules: multi-objective training to explore Pareto trade-offs, and frequentist uncertainty analysis to quantify parameter uncertainty and assess model misspecification.</p>
+      </div>
+    </article>
+    <section id="about" class="about">
+      <h2>About this blog</h2>
+      <p>Hydrologic hypothesis testing, capability extensions, project descriptions, tutorials, bug fixes, research ideas, and community applications with SAGEhydrology and SITEhydrology. Written by Jasper A. Vrugt, University of California, Irvine.</p>
+    </section>
+<section id="downloads" class="downloads">
+      <h2>Try the software</h2>
+      <div class="download-grid">
+        <a href="https://github.com/jaspervrugt/SAGEhydrology/releases"><strong>SAGEhydrology</strong><span>Learning across basins →</span></a>
+        <a href="https://github.com/jaspervrugt/SITEhydrology/releases"><strong>SITEhydrology</strong><span>Basin-specific calibration →</span></a>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Jasper A. Vrugt</footer>
+</body>
+</html>
