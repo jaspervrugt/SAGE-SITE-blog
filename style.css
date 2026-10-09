@@ -9,3 +9,7 @@ article{max-width:740px;margin:60px auto}.post-header h2{font-size:clamp(28px,4v
 @media(max-width:600px){.site-header{align-items:flex-start;flex-direction:column;padding:22px}main{padding:0 22px}.intro{padding:40px 0}article{margin:40px auto}.download-grid{grid-template-columns:1fr}.post-body{font-size:18px}}
 
 .intro .sage-sketch{margin:28px 0 24px}.intro .sage-sketch img{border:0}
+
+.basin-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0 12px}.basin-gallery figure{margin:0}.basin-gallery-note{font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;color:var(--muted)}
+@media(min-width:1000px){.basin-gallery{width:calc(100% + 220px);margin-left:-110px}}
+@media(max-width:700px){.basin-gallery{grid-template-columns:1fr}}

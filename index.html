@@ -43,10 +43,17 @@
         <p>Multi-country training was already possible in v1.0.3 with CAMELS-AT, based on LamaH-CE, which includes Austria and neighboring countries such as Czechia and Hungary. The new CHAMELLION integration brings together European catchments, while the combined CAMELS-SPAT integration covers the United States and Canada. These additions broaden the range of environments available for training and testing hydrologic hypotheses across countries.</p>
         <p>These collections allow training and evaluation to span national boundaries within a dataset. Country boundaries are useful for organizing data, but the scientific questions concern differences in climate, soils, geology, topography, and hydrologic response. Does a proposed relationship explain behavior across those differences? Where does it fail, and what might that failure tell us about the processes missing from the model?</p>
         <p><strong>Development status:</strong> CHAMELLION and the combined US–Canada CAMELS-SPAT integration are additions being prepared for v1.0.4; they are not features of the published v1.0.3 application.</p>
-        <figure>
-          <a href="assets/sage-europe-basins.png"><img src="assets/sage-europe-basins.png" alt="SAGE Europe tab displaying CHAMELLION training basins as blue circles and evaluation basins as green squares" width="1038" height="1022"></a>
-          <figcaption>The Europe tab in SAGEhydrology showing CHAMELLION catchments selected for training (blue circles; 3,648 basins) and evaluation (green squares; 912 basins). Click the image to view it at full size.</figcaption>
-        </figure>
+        <div class="basin-gallery">
+          <figure>
+            <a href="assets/sage-europe-basins.png"><img src="assets/sage-europe-basins.png" alt="CHAMELLION European training and evaluation basins in SAGE" width="1038" height="1022" loading="lazy"></a>
+            <figcaption><strong>CHAMELLION — Europe.</strong> 3,648 training basins and 912 evaluation basins.</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/sage-north-america-basins.png"><img src="assets/sage-north-america-basins.png" alt="CAMELS-SPAT United States and Canada training and evaluation basins in SAGE" width="1039" height="1019" loading="lazy"></a>
+            <figcaption><strong>CAMELS-SPAT — US and Canada.</strong> 1,141 training basins and 285 evaluation basins.</figcaption>
+          </figure>
+        </div>
+        <p class="basin-gallery-note">Blue circles show training basins; green squares show evaluation basins. Click either screenshot to view it at full size.</p>
         <h3>A basin-by-basin benchmark with SITE</h3>
         <p>SITE calibrates a separate parameter vector for each basin. It provides a complementary benchmark: how well can the same model perform when its parameters are estimated independently for each watershed?</p>
         <p>Comparing SAGE and SITE helps us examine the benefits and limitations of learning across basins. The comparison is most informative when the model, observations, time periods, objective function, and numerical settings are aligned. Neither approach establishes a theory by itself; both support experiments that can challenge it.</p>
