@@ -13,3 +13,7 @@ article{max-width:740px;margin:60px auto}.post-header h2{font-size:clamp(28px,4v
 .basin-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0 12px}.basin-gallery figure{margin:0}.basin-gallery-note{font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;color:var(--muted)}
 @media(min-width:1000px){.basin-gallery{width:calc(100% + 220px);margin-left:-110px}}
 @media(max-width:700px){.basin-gallery{grid-template-columns:1fr}}
+
+.basin-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:32px 0 12px}.basin-gallery figure{margin:0}.basin-gallery-note{font-family:system-ui,sans-serif;font-size:14px;line-height:1.5;color:var(--muted)}
+@media(min-width:1000px){.basin-gallery{width:calc(100% + 220px);margin-left:-110px}}
+@media(max-width:700px){.basin-gallery{grid-template-columns:1fr}}
