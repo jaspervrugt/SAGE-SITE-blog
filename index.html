@@ -11,7 +11,7 @@
 
   <header class="site-header">
     <a class="brand" href="#">SAGE &amp; SITE<span>hydrology</span></a>
-    <nav aria-label="Main navigation"><a href="#welcome">Blog</a><a href="#about">About</a><a href="#downloads">Downloads</a></nav>
+    <nav aria-label="Main navigation"><a href="#site-shared-benchmarks">Blog</a><a href="#about">About</a><a href="#downloads">Downloads</a></nav>
   </header>
   <main>
     <section class="intro">
@@ -20,6 +20,36 @@
       <figure class="sage-sketch"><a href="assets/sage-framework-sketch.png"><img src="assets/sage-framework-sketch.png" alt="SAGE framework illustrated through catchment attributes and parameters, hydrology, learning, and sensitivities around a central brain" width="1536" height="1024" fetchpriority="high"></a></figure>
       <p>Notes from the development and application of SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.</p>
     </section>
+    <article id="site-shared-benchmarks">
+      <header class="post-header">
+        <p class="eyebrow">SITE update · Shared benchmarks · Second post</p>
+        <h2>SITE Hydrology builds shared performance benchmarks</h2>
+        <p><em>How optimization trials contribute better solutions across nine loss functions.</em></p>
+        <p class="byline">Jasper A. Vrugt · October 11, 2026</p>
+      </header>
+      <div class="post-body">
+<p>SITE Hydrology now uses global file updating to share improvements across runs and users. Results found on one computer can improve the reference solutions available to everyone through GitHub.</p>
+<figure><a href="assets/site-shared-results-cartoon.png"><img src="assets/site-shared-results-cartoon.png" alt="Four users exchange local results with SITE Hydrology and GitHub. Orange arrows follow an improved solution from the office user through GitHub to the watershed user." width="1536" height="1024" loading="lazy"></a>
+<figcaption>Blue arrows show uploads and downloads. Orange follows a better solution from user 1 at work to GitHub, then to user 3 in the watershed.</figcaption></figure>
+<h3>Every trial can improve several criteria</h3>
+<p>A run performs <code>ntrials</code> optimization trials using a selected loss function and algorithm. For each trial’s optimized solution, SITE computes all nine commonly used loss functions and compares them with the best results in the respective files for the same configuration. A better solution replaces the corresponding entry; otherwise, the existing result is retained.</p>
+<p>This means a run that maximizes Kling–Gupta efficiency (KGE) can also improve Nash–Sutcliffe efficiency (NSE). For example, a trial might fall short of the stored KGE record but exceed the stored NSE record. SITE then updates the NSE solution while keeping the existing KGE solution. Each trial contributes information beyond the objective that guided its search.</p>
+<p>Comparisons follow each criterion’s direction: higher efficiencies or lower losses. The files contain the best known results found so far, which may come from different trials, algorithms, and users.</p>
+<h3>Download locally and share improvements</h3>
+<p>For runs using the default SITE benchmark settings, the exchange follows three steps:</p>
+<ol>
+<li><strong>Download:</strong> At the start of a run, SITE downloads the latest results files from GitHub.</li>
+<li><strong>Compute and store:</strong> Trials run locally. Their optimized solutions are evaluated, and results are stored in local files.</li>
+<li><strong>Upload:</strong> Improvements are uploaded to GitHub and replace the respective shared entries, making them available to subsequent runs.</li>
+</ol>
+<p>The cartoon shows how an improvement found at work reaches a user in the watershed. Users at home participate in the same exchange; the phone illustrates checking shared results on the go.</p>
+<h3>Which results belong in the shared benchmarks</h3>
+<p>The GitHub results files cover all countries and regions represented by SITE’s supported datasets, the available time resolutions (15-minute, hourly, and daily), hydrologic models, and choices of meteorological products. Results are kept separately for each configuration so that comparisons use the same dataset, time resolution, model, and meteorological inputs.</p>
+<p>Shared benchmarks use the <strong>default SITE settings</strong> for the training and evaluation periods, spin-up period, initial model states, and ordinary differential equation (ODE) variables. If a user chooses a different training or evaluation period, results are stored <strong>locally only</strong>, without updating GitHub. Restricting the shared collection to the default settings keeps comparisons consistent and avoids an unlimited number of results for custom configurations.</p>
+<p>Our aim is to build a benchmark of each model’s performance for each dataset, time resolution, and meteorological product across <strong>nine commonly used loss functions</strong>. Contributions from different users can improve these benchmarks over time.</p>
+<p>Each shared solution records the <strong>user, computer, and platform</strong> that created it. Its origin remains traceable as the shared collection improves, allowing SITE to use both the computational effort and discoveries of its users efficiently.</p>
+      </div>
+    </article>
     <article id="welcome">
       <header class="post-header">
         <p class="eyebrow">What’s new · Why SAGE · First post</p>
@@ -78,3 +108,4 @@
   <footer>© 2026 Jasper A. Vrugt</footer>
 </body>
 </html>
+
