@@ -1,127 +1,138 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Hydrologic theory, experiments, and software updates with SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.">
-  <title>SAGE &amp; SITEhydrology — Blog</title>
-  <link rel="stylesheet" href="style.css?v=20261009-gallery2">
-</head>
-<body>
-
-  <header class="site-header">
-    <a class="brand" href="#">SAGE &amp; SITE<span>hydrology</span></a>
-    <nav aria-label="Main navigation"><a href="#python-sage-site">Blog</a><a href="#about">About</a><a href="#downloads">Downloads</a></nav>
-  </header>
-  <main>
-    <section class="intro">
-      <p class="eyebrow">Hydrologic theory · Hypothesis testing · Large-sample data</p>
-      <h1>Understanding catchments,<br>one hypothesis at a time.</h1>
-      <figure class="sage-sketch"><a href="assets/sage-framework-sketch.png"><img src="assets/sage-framework-sketch.png" alt="SAGE framework illustrated through catchment attributes and parameters, hydrology, learning, and sensitivities around a central brain" width="1536" height="1024" fetchpriority="high"></a></figure>
-      <p>Notes from the development and application of SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.</p>
-    </section>
-
-    <article id="python-sage-site">
-      <header class="post-header">
-        <p class="eyebrow">Software update · Python · Windows + macOS</p>
-        <h2>SAGE and SITEhydrology: Python versions are coming</h2>
-        <p class="byline">Jasper A. Vrugt · October 16, 2026</p>
-      </header>
-      <div class="post-body">
-        <p>Python implementations of <strong>SAGEhydrology</strong> and <strong>SITEhydrology</strong> are nearly ready for release. Alongside the Python source code, we are preparing desktop applications for <strong>Windows and macOS</strong>.</p>
-        <figure><a href="assets/sage-site-python-cartoon.png"><img src="assets/sage-site-python-cartoon.png" alt="Researchers carry SAGE and SITE model notebooks across a river bridge from MATLAB to Python, with Windows and macOS users in a mountain watershed" width="1536" height="1024" loading="lazy"></a><figcaption>SAGE and SITEhydrology are making their way from MATLAB to Python, with desktop applications for Windows and macOS.</figcaption></figure>
-        <p>The goal remains the same: provide practical tools for exploring hydrological models, estimating their parameters, and comparing model performance across catchments and datasets. The Python versions bring these capabilities to a widely used scientific computing environment, with graphical applications for configuring runs and inspecting results.</p>
-        <p>We are now in the final stages of testing the source code and applications. Once testing is complete, we plan to upload the Python source and the Windows and macOS applications to the respective GitHub repositories.</p>
-        <p>We will share the download links and getting-started instructions here when the release is available.</p>
-        <p>Stay tuned, and thank you to everyone helping us test and improve SAGE and SITEhydrology.</p>
-      </div>
-    </article>
-    <article id="site-shared-benchmarks">
-      <header class="post-header">
-        <p class="eyebrow">SITE update · Shared benchmarks · Second post</p>
-        <h2>SITE Hydrology builds shared performance benchmarks</h2>
-        <p><em>How optimization trials contribute better solutions across nine loss functions.</em></p>
-        <p class="byline">Jasper A. Vrugt · October 11, 2026</p>
-      </header>
-      <div class="post-body">
-<p>SITE Hydrology now uses global file updating to share improvements across runs and users. Results found on one computer can improve the reference solutions available to everyone through GitHub.</p>
-<figure><a href="assets/site-shared-results-cartoon.png"><img src="assets/site-shared-results-cartoon.png" alt="Four users exchange local results with SITE Hydrology and GitHub. Orange arrows follow an improved solution from the office user through GitHub to the watershed user." width="1536" height="1024" loading="lazy"></a>
-<figcaption>Blue arrows show uploads and downloads. Orange follows a better solution from user 1 at work to GitHub, then to user 3 in the watershed.</figcaption></figure>
-<h3>Every trial can improve several criteria</h3>
-<p>A run performs <code>ntrials</code> optimization trials using a selected loss function and algorithm. For each trial’s optimized solution, SITE computes all nine commonly used loss functions and compares them with the best results in the respective files for the same configuration. A better solution replaces the corresponding entry; otherwise, the existing result is retained.</p>
-<p>This means a run that maximizes Kling–Gupta efficiency (KGE) can also improve Nash–Sutcliffe efficiency (NSE). For example, a trial might fall short of the stored KGE record but exceed the stored NSE record. SITE then updates the NSE solution while keeping the existing KGE solution. Each trial contributes information beyond the objective that guided its search.</p>
-<p>Comparisons follow each criterion’s direction: higher efficiencies or lower losses. The files contain the best known results found so far, which may come from different trials, algorithms, and users.</p>
-<h3>Download locally and share improvements</h3>
-<p>For runs using the default SITE benchmark settings, the exchange follows three steps:</p>
-<ol>
-<li><strong>Download:</strong> At the start of a run, SITE downloads the latest results files from GitHub.</li>
-<li><strong>Compute and store:</strong> Trials run locally. Their optimized solutions are evaluated, and results are stored in local files.</li>
-<li><strong>Upload:</strong> Improvements are uploaded to GitHub and replace the respective shared entries, making them available to subsequent runs.</li>
-</ol>
-<p>The cartoon shows how an improvement found at work reaches a user in the watershed. Users at home participate in the same exchange; the phone illustrates checking shared results on the go.</p>
-<h3>Which results belong in the shared benchmarks</h3>
-<p>The GitHub results files cover all countries and regions represented by SITE’s supported datasets, the available time resolutions (15-minute, hourly, and daily), hydrologic models, and choices of meteorological products. Results are kept separately for each configuration so that comparisons use the same dataset, time resolution, model, and meteorological inputs.</p>
-<p>Shared benchmarks use the <strong>default SITE settings</strong> for the training and evaluation periods, spin-up period, initial model states, and ordinary differential equation (ODE) variables. If a user chooses a different training or evaluation period, results are stored <strong>locally only</strong>, without updating GitHub. Restricting the shared collection to the default settings keeps comparisons consistent and avoids an unlimited number of results for custom configurations.</p>
-<p>Our aim is to build a benchmark of each model’s performance for each dataset, time resolution, and meteorological product across <strong>nine commonly used loss functions</strong>. Contributions from different users can improve these benchmarks over time.</p>
-<p>Each shared solution records the <strong>user, computer, and platform</strong> that created it. Its origin remains traceable as the shared collection improves, allowing SITE to use both the computational effort and discoveries of its users efficiently.</p>
-      </div>
-    </article>
-    <article id="welcome">
-      <header class="post-header">
-        <p class="eyebrow">What’s new · Why SAGE · First post</p>
-        <h2>From prediction to understanding: testing hydrologic hypotheses across countries</h2>
-        <p class="byline">Jasper A. Vrugt · October 8, 2026</p>
-      </header>
-      <div class="post-body">
-        <p>I developed SAGE to make it easier to test hydrologic hypotheses against large-sample datasets, in pursuit of new theory about how catchments store, transmit, and release water. Faster training is useful because it makes more scientific experiments possible. The ultimate aim is a better understanding of how catchments function.</p>
-        <p>The blog will combine capability extensions—new modules, models, datasets, and options—with project descriptions, practical tutorials, bug fixes, and release notes. I also want to share general observations and research ideas, discuss numerical and modeling choices, and feature applications and questions contributed by users.</p>
-        <p>My hope is that this blog becomes a place to exchange experiments and questions. If you use SAGE or SITE in your research, I would be interested to hear what you tested, what failed, and what you discovered about catchment behavior. This first post is longer because it introduces the purpose of SAGE and the scope of the blog. Future posts will be much shorter, each focused on one update, experiment, or idea, so they are easier to read and use.</p>
-        <h3>What did the model learn?</h3>
-        <p>We can train an LSTM with tens of thousands of adjustable parameters to obtain excellent predictions of river discharge. But what did it learn about the watershed? Which parts of its behavior reflect storage, connectivity, thresholds, or delayed responses—and which relationships will hold under conditions outside the training data?</p>
-        <p>Machine learning offers powerful tools for prediction and discovery. My concern is what happens if predictive accuracy becomes the sole measure of progress. Hydrology risks becoming a number-crunching discipline in which improving a score takes precedence over explaining the system that produced the observations.</p>
-        <p>A scientific discipline needs theory on which it can build. Theory allows us to state assumptions explicitly, derive testable consequences, design experiments that distinguish competing explanations, and revise our understanding when observations contradict it. It also gives us a basis for asking when a relationship should transfer to a new catchment, climate, or time scale.</p>
-        <h3>SAGE as a framework for hypothesis testing</h3>
-        <p>SAGE trains hydrologic models across a collection of basins. It learns a relationship between catchment attributes and model parameters, allowing information from the training basins to inform predictions in other basins. Analytic forward sensitivities provide the gradients used in training.</p>
-        <p>This makes it practical to express a hypothesis in a model’s equations, compare alternative formulations under aligned conditions, and examine whether their behavior transfers beyond the calibration sample. We might ask whether a different storage–discharge relationship explains recession behavior, whether a delayed response improves the representation of transport, or whether a proposed mechanism remains useful across contrasting catchments.</p>
-        <p>A good fit alone does not establish that a mechanism is correct. Different models can reproduce similar discharge records. Testing against independent basins and periods, examining model states and fluxes, and using additional observation types where available can provide stronger constraints. SAGE is intended to make that cycle of proposing, testing, rejecting, and refining hypotheses easier. For example, HYD-RESPONSES allows hypotheses to be tested against discharge, snow water equivalent, and soil moisture using the seven built-in models or <code>user_model</code>.</p>
-        <h3>Extending those tests across countries</h3>
-        <p>Most datasets available in SAGE are organized by country, with several countries offering more than one collection. Examples include CAMELS-US, MACH-US, and CAMELSH-US for the United States; CAMELS-KR and CAMELSH-KR for South Korea; and CAMELS-ES and BULL-ES for Spain.</p>
-        <p>Multi-country training was already possible in v1.0.3 with CAMELS-AT, based on LamaH-CE, which includes Austria and neighboring countries such as Czechia and Hungary. The new CHAMELLION integration brings together European catchments, while the combined CAMELS-SPAT integration covers the United States and Canada. These additions broaden the range of environments available for training and testing hydrologic hypotheses across countries.</p>
-        <p>These collections allow training and evaluation to span national boundaries within a dataset. Country boundaries are useful for organizing data, but the scientific questions concern differences in climate, soils, geology, topography, and hydrologic response. Does a proposed relationship explain behavior across those differences? Where does it fail, and what might that failure tell us about the processes missing from the model?</p>
-        <p><strong>Development status:</strong> CHAMELLION and the combined US–Canada CAMELS-SPAT integration are additions being prepared for v1.0.4; they are not features of the published v1.0.3 application.</p>
-        <div class="basin-gallery">
-          <figure>
-            <a href="assets/sage-europe-basins.png"><img src="assets/sage-europe-basins.png" alt="CHAMELLION European training and evaluation basins in SAGE" width="1038" height="1022" loading="lazy"></a>
-            <figcaption><strong>CHAMELLION &mdash; Europe.</strong> 3,648 training basins and 912 evaluation basins.</figcaption>
-          </figure>
-          <figure>
-            <a href="assets/sage-north-america-basins.png"><img src="assets/sage-north-america-basins.png" alt="CAMELS-SPAT United States and Canada training and evaluation basins in SAGE" width="1039" height="1019" loading="lazy"></a>
-            <figcaption><strong>CAMELS-SPAT &mdash; US and Canada.</strong> 1,141 training basins and 285 evaluation basins.</figcaption>
-          </figure>
-        </div>
-        <p class="basin-gallery-note">Blue circles show training basins; green squares show evaluation basins. Click either screenshot to view it at full size.</p>
-        <h3>A basin-by-basin benchmark with SITE</h3>
-        <p>SITE calibrates a separate parameter vector for each basin. It provides a complementary benchmark: how well can the same model perform when its parameters are estimated independently for each watershed?</p>
-        <p>Comparing SAGE and SITE helps us examine the benefits and limitations of learning across basins. The comparison is most informative when the model, observations, time periods, objective function, and numerical settings are aligned. Neither approach establishes a theory by itself; both support experiments that can challenge it.</p>
-        <h3>Making experiments easier to repeat</h3>
-        <p>I developed the graphical interfaces to make these experiments easier to configure, inspect, and repeat. The workflow brings together dataset installation, basin selection, model settings, training or calibration, and diagnostic plots. The computational source is also available for researchers who want to inspect or extend the methods.</p>
-        <h3>Where to begin</h3>
-        <p>Download the application for your operating system from the <a href="https://github.com/jaspervrugt/SAGEhydrology/releases">SAGEhydrology releases</a> or <a href="https://github.com/jaspervrugt/SITEhydrology/releases">SITEhydrology releases</a> page. Start with a supported dataset and a small experiment before expanding to a larger basin collection. While you explore SAGE’s current capabilities, I am preparing v1.0.4 with AI-assisted modeling and developing two further modules: multi-objective training to explore Pareto trade-offs, and frequentist uncertainty analysis to quantify parameter uncertainty and assess model misspecification.</p>
-      </div>
-    </article>
-    <section id="about" class="about">
-      <h2>About this blog</h2>
-      <p>Hydrologic hypothesis testing, capability extensions, project descriptions, tutorials, bug fixes, research ideas, and community applications with SAGEhydrology and SITEhydrology. Written by Jasper A. Vrugt, University of California, Irvine.</p>
-    </section>
-<section id="downloads" class="downloads">
-      <h2>Try the software</h2>
-      <div class="download-grid">
-        <a href="https://github.com/jaspervrugt/SAGEhydrology/releases"><strong>SAGEhydrology</strong><span>Learning across basins →</span></a>
-        <a href="https://github.com/jaspervrugt/SITEhydrology/releases"><strong>SITEhydrology</strong><span>Basin-specific calibration →</span></a>
-      </div>
-    </section>
-  </main>
-  <footer>© 2026 Jasper A. Vrugt</footer>
-</body>
-</html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Hydrologic theory, experiments, and software updates with SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.">
+  <title>SAGE &amp; SITEhydrology — Blog</title>
+  <link rel="stylesheet" href="style.css?v=20261009-gallery2">
+<style>#sage-gui-paper .paper-citation{padding:20px 24px;border-left:4px solid #146c87;background:#edf3f4;font-family:system-ui,sans-serif;font-size:17px;line-height:1.6}</style></head>
+<body>
 
+  <header class="site-header">
+    <a class="brand" href="#">SAGE &amp; SITE<span>hydrology</span></a>
+    <nav aria-label="Main navigation"><a href="#sage-gui-paper">Blog</a><a href="#about">About</a><a href="#downloads">Downloads</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow">Hydrologic theory · Hypothesis testing · Large-sample data</p>
+      <h1>Understanding catchments,<br>one hypothesis at a time.</h1>
+      <figure class="sage-sketch"><a href="assets/sage-framework-sketch.png"><img src="assets/sage-framework-sketch.png" alt="SAGE framework illustrated through catchment attributes and parameters, hydrology, learning, and sensitivities around a central brain" width="1536" height="1024" fetchpriority="high"></a></figure>
+      <p>Notes from the development and application of SAGEhydrology and SITEhydrology, by Jasper A. Vrugt.</p>
+    </section>
+
+<article id="sage-gui-paper">
+<header class="post-header"><p class="eyebrow">Publication news · SAGE GUI · Environmental Modelling &amp; Software</p><h2>The SAGE GUI paper is now published</h2><p class="byline">Jasper A. Vrugt · October 17, 2026</p></header>
+<div class="post-body"><p>Our paper introducing the SAGE graphical user interface is now available online in <i>Environmental Modelling &amp; Software</i>.</p>
+<p class="paper-citation"><strong>SAGE GUI: Fast and flexible differentiable hydrologic modeling with analytic gradients</strong><br>Jasper A. Vrugt and Jonathan M. Frame<br><em>Environmental Modelling &amp; Software</em>, 2026, Article 107194<br><a href="https://doi.org/10.1016/j.envsoft.2026.107194">Read the paper · DOI: 10.1016/j.envsoft.2026.107194</a></p>
+<figure><a href="assets/sage-gui-paper-cartoon.png"><img src="assets/sage-gui-paper-cartoon.png" alt="Researchers use SAGE GUI to connect catchment datasets, hydrological models, analytic gradients, diagnostics and MATLAB script export" width="1536" height="1024"></a><figcaption>From catchment data to model training, diagnostics and reproducible experiments within SAGE GUI.</figcaption></figure>
+<p>SAGE GUI brings the complete modeling workflow into one application: preparing data, configuring hydrological models and neural networks, training, examining diagnostics, and exporting reproducible experiments. Analytically calculated sensitivities connect the hydrological models to gradient-based learning.</p>
+<p>The paper describes <b>44 datasets across 38 regions</b>, most corresponding to individual countries. Some collections span national borders, such as <b>CAMELS_AT</b>, which covers Austria and surrounding countries.</p>
+<p>Development has continued since the version documented in the paper. The latest release adds <b>CHAMELLION</b>, covering catchments across multiple European countries, and <b>CAMELS_SPAT</b>, covering catchments in the United States and Canada. These additions bring the total to <b>46 datasets</b> and expand the opportunities for cross-border hydrological modeling, as discussed in <a href="https://jaspervrugt.github.io/SAGE-SITE-blog/#welcome">our first blog post</a>.</p>
+<p>Accessibility and transparency are central to the design. Researchers and students can configure experiments graphically, then export MATLAB scripts to inspect, modify and execute the workflow themselves. Windows and macOS applications run with the freely available MATLAB Runtime, without requiring a licensed MATLAB installation. Python source code and standalone applications for Windows and macOS are in the final stages of testing and will be released soon on GitHub.</p>
+<p>We hope the paper provides a useful starting point for applying SAGE to test hydrological hypotheses and develop new theory about how catchments store, transmit and release water.</p>
+<p><a href="https://doi.org/10.1016/j.envsoft.2026.107194">Read the article</a> · <a href="https://github.com/jaspervrugt/SAGEhydrology">Explore SAGEhydrology</a></p></div></article>
+    <article id="python-sage-site">
+      <header class="post-header">
+        <p class="eyebrow">Software update · Python · Windows + macOS</p>
+        <h2>SAGE and SITEhydrology: Python versions are coming</h2>
+        <p class="byline">Jasper A. Vrugt · October 16, 2026</p>
+      </header>
+      <div class="post-body">
+        <p>Python implementations of <strong>SAGEhydrology</strong> and <strong>SITEhydrology</strong> are nearly ready for release. Alongside the Python source code, we are preparing desktop applications for <strong>Windows and macOS</strong>.</p>
+        <figure><a href="assets/sage-site-python-cartoon.png"><img src="assets/sage-site-python-cartoon.png" alt="Researchers carry SAGE and SITE model notebooks across a river bridge from MATLAB to Python, with Windows and macOS users in a mountain watershed" width="1536" height="1024" loading="lazy"></a><figcaption>SAGE and SITEhydrology are making their way from MATLAB to Python, with desktop applications for Windows and macOS.</figcaption></figure>
+        <p>The goal remains the same: provide practical tools for exploring hydrological models, estimating their parameters, and comparing model performance across catchments and datasets. The Python versions bring these capabilities to a widely used scientific computing environment, with graphical applications for configuring runs and inspecting results.</p>
+        <p>We are now in the final stages of testing the source code and applications. Once testing is complete, we plan to upload the Python source and the Windows and macOS applications to the respective GitHub repositories.</p>
+        <p>We will share the download links and getting-started instructions here when the release is available.</p>
+        <p>Stay tuned, and thank you to everyone helping us test and improve SAGE and SITEhydrology.</p>
+      </div>
+    </article>
+    <article id="site-shared-benchmarks">
+      <header class="post-header">
+        <p class="eyebrow">SITE update · Shared benchmarks · Second post</p>
+        <h2>SITE Hydrology builds shared performance benchmarks</h2>
+        <p><em>How optimization trials contribute better solutions across nine loss functions.</em></p>
+        <p class="byline">Jasper A. Vrugt · October 11, 2026</p>
+      </header>
+      <div class="post-body">
+<p>SITE Hydrology now uses global file updating to share improvements across runs and users. Results found on one computer can improve the reference solutions available to everyone through GitHub.</p>
+<figure><a href="assets/site-shared-results-cartoon.png"><img src="assets/site-shared-results-cartoon.png" alt="Four users exchange local results with SITE Hydrology and GitHub. Orange arrows follow an improved solution from the office user through GitHub to the watershed user." width="1536" height="1024" loading="lazy"></a>
+<figcaption>Blue arrows show uploads and downloads. Orange follows a better solution from user 1 at work to GitHub, then to user 3 in the watershed.</figcaption></figure>
+<h3>Every trial can improve several criteria</h3>
+<p>A run performs <code>ntrials</code> optimization trials using a selected loss function and algorithm. For each trial’s optimized solution, SITE computes all nine commonly used loss functions and compares them with the best results in the respective files for the same configuration. A better solution replaces the corresponding entry; otherwise, the existing result is retained.</p>
+<p>This means a run that maximizes Kling–Gupta efficiency (KGE) can also improve Nash–Sutcliffe efficiency (NSE). For example, a trial might fall short of the stored KGE record but exceed the stored NSE record. SITE then updates the NSE solution while keeping the existing KGE solution. Each trial contributes information beyond the objective that guided its search.</p>
+<p>Comparisons follow each criterion’s direction: higher efficiencies or lower losses. The files contain the best known results found so far, which may come from different trials, algorithms, and users.</p>
+<h3>Download locally and share improvements</h3>
+<p>For runs using the default SITE benchmark settings, the exchange follows three steps:</p>
+<ol>
+<li><strong>Download:</strong> At the start of a run, SITE downloads the latest results files from GitHub.</li>
+<li><strong>Compute and store:</strong> Trials run locally. Their optimized solutions are evaluated, and results are stored in local files.</li>
+<li><strong>Upload:</strong> Improvements are uploaded to GitHub and replace the respective shared entries, making them available to subsequent runs.</li>
+</ol>
+<p>The cartoon shows how an improvement found at work reaches a user in the watershed. Users at home participate in the same exchange; the phone illustrates checking shared results on the go.</p>
+<h3>Which results belong in the shared benchmarks</h3>
+<p>The GitHub results files cover all countries and regions represented by SITE’s supported datasets, the available time resolutions (15-minute, hourly, and daily), hydrologic models, and choices of meteorological products. Results are kept separately for each configuration so that comparisons use the same dataset, time resolution, model, and meteorological inputs.</p>
+<p>Shared benchmarks use the <strong>default SITE settings</strong> for the training and evaluation periods, spin-up period, initial model states, and ordinary differential equation (ODE) variables. If a user chooses a different training or evaluation period, results are stored <strong>locally only</strong>, without updating GitHub. Restricting the shared collection to the default settings keeps comparisons consistent and avoids an unlimited number of results for custom configurations.</p>
+<p>Our aim is to build a benchmark of each model’s performance for each dataset, time resolution, and meteorological product across <strong>nine commonly used loss functions</strong>. Contributions from different users can improve these benchmarks over time.</p>
+<p>Each shared solution records the <strong>user, computer, and platform</strong> that created it. Its origin remains traceable as the shared collection improves, allowing SITE to use both the computational effort and discoveries of its users efficiently.</p>
+      </div>
+    </article>
+    <article id="welcome">
+      <header class="post-header">
+        <p class="eyebrow">What’s new · Why SAGE · First post</p>
+        <h2>From prediction to understanding: testing hydrologic hypotheses across countries</h2>
+        <p class="byline">Jasper A. Vrugt · October 8, 2026</p>
+      </header>
+      <div class="post-body">
+        <p>I developed SAGE to make it easier to test hydrologic hypotheses against large-sample datasets, in pursuit of new theory about how catchments store, transmit, and release water. Faster training is useful because it makes more scientific experiments possible. The ultimate aim is a better understanding of how catchments function.</p>
+        <p>The blog will combine capability extensions—new modules, models, datasets, and options—with project descriptions, practical tutorials, bug fixes, and release notes. I also want to share general observations and research ideas, discuss numerical and modeling choices, and feature applications and questions contributed by users.</p>
+        <p>My hope is that this blog becomes a place to exchange experiments and questions. If you use SAGE or SITE in your research, I would be interested to hear what you tested, what failed, and what you discovered about catchment behavior. This first post is longer because it introduces the purpose of SAGE and the scope of the blog. Future posts will be much shorter, each focused on one update, experiment, or idea, so they are easier to read and use.</p>
+        <h3>What did the model learn?</h3>
+        <p>We can train an LSTM with tens of thousands of adjustable parameters to obtain excellent predictions of river discharge. But what did it learn about the watershed? Which parts of its behavior reflect storage, connectivity, thresholds, or delayed responses—and which relationships will hold under conditions outside the training data?</p>
+        <p>Machine learning offers powerful tools for prediction and discovery. My concern is what happens if predictive accuracy becomes the sole measure of progress. Hydrology risks becoming a number-crunching discipline in which improving a score takes precedence over explaining the system that produced the observations.</p>
+        <p>A scientific discipline needs theory on which it can build. Theory allows us to state assumptions explicitly, derive testable consequences, design experiments that distinguish competing explanations, and revise our understanding when observations contradict it. It also gives us a basis for asking when a relationship should transfer to a new catchment, climate, or time scale.</p>
+        <h3>SAGE as a framework for hypothesis testing</h3>
+        <p>SAGE trains hydrologic models across a collection of basins. It learns a relationship between catchment attributes and model parameters, allowing information from the training basins to inform predictions in other basins. Analytic forward sensitivities provide the gradients used in training.</p>
+        <p>This makes it practical to express a hypothesis in a model’s equations, compare alternative formulations under aligned conditions, and examine whether their behavior transfers beyond the calibration sample. We might ask whether a different storage–discharge relationship explains recession behavior, whether a delayed response improves the representation of transport, or whether a proposed mechanism remains useful across contrasting catchments.</p>
+        <p>A good fit alone does not establish that a mechanism is correct. Different models can reproduce similar discharge records. Testing against independent basins and periods, examining model states and fluxes, and using additional observation types where available can provide stronger constraints. SAGE is intended to make that cycle of proposing, testing, rejecting, and refining hypotheses easier. For example, HYD-RESPONSES allows hypotheses to be tested against discharge, snow water equivalent, and soil moisture using the seven built-in models or <code>user_model</code>.</p>
+        <h3>Extending those tests across countries</h3>
+        <p>Most datasets available in SAGE are organized by country, with several countries offering more than one collection. Examples include CAMELS-US, MACH-US, and CAMELSH-US for the United States; CAMELS-KR and CAMELSH-KR for South Korea; and CAMELS-ES and BULL-ES for Spain.</p>
+        <p>Multi-country training was already possible in v1.0.3 with CAMELS-AT, based on LamaH-CE, which includes Austria and neighboring countries such as Czechia and Hungary. The new CHAMELLION integration brings together European catchments, while the combined CAMELS-SPAT integration covers the United States and Canada. These additions broaden the range of environments available for training and testing hydrologic hypotheses across countries.</p>
+        <p>These collections allow training and evaluation to span national boundaries within a dataset. Country boundaries are useful for organizing data, but the scientific questions concern differences in climate, soils, geology, topography, and hydrologic response. Does a proposed relationship explain behavior across those differences? Where does it fail, and what might that failure tell us about the processes missing from the model?</p>
+        <p><strong>Development status:</strong> CHAMELLION and the combined US–Canada CAMELS-SPAT integration are additions being prepared for v1.0.4; they are not features of the published v1.0.3 application.</p>
+        <div class="basin-gallery">
+          <figure>
+            <a href="assets/sage-europe-basins.png"><img src="assets/sage-europe-basins.png" alt="CHAMELLION European training and evaluation basins in SAGE" width="1038" height="1022" loading="lazy"></a>
+            <figcaption><strong>CHAMELLION &mdash; Europe.</strong> 3,648 training basins and 912 evaluation basins.</figcaption>
+          </figure>
+          <figure>
+            <a href="assets/sage-north-america-basins.png"><img src="assets/sage-north-america-basins.png" alt="CAMELS-SPAT United States and Canada training and evaluation basins in SAGE" width="1039" height="1019" loading="lazy"></a>
+            <figcaption><strong>CAMELS-SPAT &mdash; US and Canada.</strong> 1,141 training basins and 285 evaluation basins.</figcaption>
+          </figure>
+        </div>
+        <p class="basin-gallery-note">Blue circles show training basins; green squares show evaluation basins. Click either screenshot to view it at full size.</p>
+        <h3>A basin-by-basin benchmark with SITE</h3>
+        <p>SITE calibrates a separate parameter vector for each basin. It provides a complementary benchmark: how well can the same model perform when its parameters are estimated independently for each watershed?</p>
+        <p>Comparing SAGE and SITE helps us examine the benefits and limitations of learning across basins. The comparison is most informative when the model, observations, time periods, objective function, and numerical settings are aligned. Neither approach establishes a theory by itself; both support experiments that can challenge it.</p>
+        <h3>Making experiments easier to repeat</h3>
+        <p>I developed the graphical interfaces to make these experiments easier to configure, inspect, and repeat. The workflow brings together dataset installation, basin selection, model settings, training or calibration, and diagnostic plots. The computational source is also available for researchers who want to inspect or extend the methods.</p>
+        <h3>Where to begin</h3>
+        <p>Download the application for your operating system from the <a href="https://github.com/jaspervrugt/SAGEhydrology/releases">SAGEhydrology releases</a> or <a href="https://github.com/jaspervrugt/SITEhydrology/releases">SITEhydrology releases</a> page. Start with a supported dataset and a small experiment before expanding to a larger basin collection. While you explore SAGE’s current capabilities, I am preparing v1.0.4 with AI-assisted modeling and developing two further modules: multi-objective training to explore Pareto trade-offs, and frequentist uncertainty analysis to quantify parameter uncertainty and assess model misspecification.</p>
+      </div>
+    </article>
+    <section id="about" class="about">
+      <h2>About this blog</h2>
+      <p>Hydrologic hypothesis testing, capability extensions, project descriptions, tutorials, bug fixes, research ideas, and community applications with SAGEhydrology and SITEhydrology. Written by Jasper A. Vrugt, University of California, Irvine.</p>
+    </section>
+<section id="downloads" class="downloads">
+      <h2>Try the software</h2>
+      <div class="download-grid">
+        <a href="https://github.com/jaspervrugt/SAGEhydrology/releases"><strong>SAGEhydrology</strong><span>Learning across basins →</span></a>
+        <a href="https://github.com/jaspervrugt/SITEhydrology/releases"><strong>SITEhydrology</strong><span>Basin-specific calibration →</span></a>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 Jasper A. Vrugt</footer>
+</body>
+</html>
+
